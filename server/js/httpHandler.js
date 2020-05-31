@@ -14,17 +14,34 @@ module.exports.initialize = (queue) => {
 
 module.exports.router = (req, res, next = ()=>{}) => {
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
-  //console.log(this.backgroundImageFile);
   if (req.method === 'OPTIONS') {
     res.writeHead(200, headers);
     res.end();
-  } else if (req.method === 'GET' && req.url === '/') {
+    next();
+  }
+
+  if (req.method === 'GET' && req.url === '/') {
     res.writeHead(200, headers);
     res.end(messageQueue.dequeue());
+    next();
+  } else if (req.method === 'GET' && req.url === '/background.jpg') {
+    // Send image back
+    fs.readFile(this.backgroundImageFile, (err, data) => {
+      if (err) { // Bad request
+        res.writeHead(404, headers);
+        res.end();
+        next();
+      } else { // Good request
+        res.writeHead(200, {'Content-Type': 'image/jpeg'})
+        res.write(data);
+        res.end();
+        next();
+      }
+    })
   }
-  // else if (req.method === 'GET' && req.url === '/background.jpg') {
-  //   //how to concat binary data and what format ofsend
-  //   res.writeHead(200, headers);
-  //   res.end();
-  next(); // invoke next() at the end of a request to help with testing!
+
+  // if (req.method === 'POST') {
+  //   // Do something
+  // }
+  // invoke next() at the end of a request to help with testing!
 };

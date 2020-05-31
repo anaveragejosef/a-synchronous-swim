@@ -8,8 +8,6 @@ keypressHandler.initialize(message => {
   messageQueue.enqueue(message);
 });
 
-//isValidMessage
-
 const httpHandler = require('./js/httpHandler');
 httpHandler.initialize(messageQueue);
 
