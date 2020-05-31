@@ -15,20 +15,12 @@
     url: serverUrl,
     // data: data,
     success: (data) => {
-      console.log('Server hit');
       SwimTeam.move(data);
     },
     error: (err) => {
       console.log('Error reaching server: ' + err);
     }
   })}, 1000);
-
-  //setInterval(function(){ alert("Hello"); }, 3000);
-
-  // $.get( "ajax/test.html", function( data ) {
-  //   $( ".result" ).html( data );
-  //   alert( "Load was performed." );
-  // });
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
@@ -41,7 +33,7 @@
     $.ajax({
       type: 'POST',
       data: formData,
-      url: FILL_ME_IN,
+      url: 'http://127.0.0.1:3000/background.jpg',
       cache: false,
       contentType: false,
       processData: false,
