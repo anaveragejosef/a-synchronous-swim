@@ -40,8 +40,9 @@ module.exports.router = (req, res, next = ()=>{}) => {
     })
   }
 
-  // if (req.method === 'POST') {
-  //   // Do something
-  // }
+  if (req.method === 'POST' && req.url === '/background.jpg') {
+    // Do something
+
+  }
   // invoke next() at the end of a request to help with testing!
 };
